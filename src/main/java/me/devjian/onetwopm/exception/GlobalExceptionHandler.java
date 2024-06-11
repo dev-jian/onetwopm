@@ -13,6 +13,18 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(Exception ex, WebRequest request) {
+        log.info("Entering handleResourceNotFoundException");
+
+        log.error(ex.getMessage());
+
+        ErrorResponse errorDetails =
+                new ErrorResponse(ex.getMessage(), request.getDescription(false), LocalDateTime.now());
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ErrorResponse> handleUnauthorizedException(Exception ex, WebRequest request) {
         log.info("Entering handleUnauthorizedException");
@@ -20,7 +32,7 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage());
 
         ErrorResponse errorDetails =
-                        new ErrorResponse(ex.getMessage(), request.getDescription(false), LocalDateTime.now());
+                new ErrorResponse(ex.getMessage(), request.getDescription(false), LocalDateTime.now());
 
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }

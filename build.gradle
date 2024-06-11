@@ -28,6 +28,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// AMQP
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 	// H2
 	runtimeOnly 'com.h2database:h2'
